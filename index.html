@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bubbles Library</title>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/dflip.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/themify-icons.min.css">
     
     <style>
+        /* Uses your dark teal for the very back, hiding white flashes */
         body, html { margin: 0; padding: 0; height: 100%; background-color: #106B6B; overflow: hidden; }
         #flipbookContainer { width: 100%; height: 100vh; }
     </style>
@@ -20,21 +22,26 @@
 
     <script>
         jQuery(document).ready(function () {
-            // 1. Get the book name from the URL (e.g., ?book=The-Room)
+            // 1. Look for the book name in the web address
             const urlParams = new URLSearchParams(window.location.search);
-            const bookName = urlParams.get('book') || 'The-Room'; // Default to The-Room if none specified
+            // Default to 'The-Room' if no specific book is asked for
+            const bookName = urlParams.get('book') || 'The-Room'; 
 
-            // 2. Path to your PDF folder
-            var pdfUrl = "books/" + bookName + ".pdf";
-            console.log("Attempting to load PDF from: " + pdfUrl);
+            // 2. The exact path to your books folder (Added ./ for strict relative linking)
+            var pdfUrl = "./books/" + bookName + ".pdf";
 
+            // Safety Check: This prints the exact link in the browser console for debugging
+            console.log("Attempting to load book from: " + pdfUrl);
+
+            // 3. Flipbook settings
             var options = {
-                direction: 2, 
+                direction: 2,               // 2 is RTL (Right to Left for Arabic)
                 height: '100%',
                 duration: 700,
-                backgroundColor: "#EDF6F7" // Using your light mint color for the inner pages
+                backgroundColor: "#EDF6F7"  // Your light mint color
             };
 
+            // 4. Start the flipbook
             $("#flipbookContainer").flipBook(pdfUrl, options);
         });
     </script>
