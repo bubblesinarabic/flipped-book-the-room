@@ -6,12 +6,10 @@
     <title>Bubbles Library</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/dflip.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/themify-icons.min.css">
     
     <style>
-        /* Base styles with Almarai font */
         body, html { 
             margin: 0; padding: 0; height: 100%; 
             background-color: #106B6B; overflow: hidden; 
@@ -20,22 +18,33 @@
         
         #flipbookContainer { width: 100%; height: 100vh; }
 
-        /* FLOATING MENU */
+        /* SCROLLABLE FLOATING MENU */
         .library-menu {
             position: fixed; 
             top: 25px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 999999 !important; 
-            background: rgba(237, 246, 247, 0.98); /* Light Mint */
-            padding: 15px 35px;
+            background: rgba(237, 246, 247, 0.98); 
+            padding: 15px 25px;
             border-radius: 25px;
-            border: 3px solid #106B6B; /* Teal Border */
+            border: 3px solid #106B6B; 
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             display: flex;
-            gap: 25px;
+            gap: 20px;
             align-items: center;
+            
+            /* New settings to allow swiping/scrolling */
+            width: 90%; 
+            max-width: 1200px;
+            overflow-x: auto; 
+            white-space: nowrap;
         }
+
+        /* Custom Scrollbar for the menu */
+        .library-menu::-webkit-scrollbar { height: 8px; }
+        .library-menu::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; margin: 10px; }
+        .library-menu::-webkit-scrollbar-thumb { background: #106B6B; border-radius: 10px; }
 
         .library-menu h3 {
             margin: 0;
@@ -44,6 +53,7 @@
             padding-left: 20px;
             border-left: 3px solid #106B6B;
             font-weight: 700;
+            flex-shrink: 0; /* Keeps title from squishing */
         }
 
         .thumb-btn {
@@ -53,18 +63,16 @@
             text-decoration: none;
             color: #106B6B;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             transition: all 0.3s ease;
+            flex-shrink: 0; /* Keeps buttons from squishing */
         }
 
-        .thumb-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            color: #0d5252;
-        }
+        .thumb-btn:hover { transform: translateY(-5px) scale(1.05); color: #0d5252; }
 
         .thumb-btn img {
-            width: 80px; 
-            height: 110px;
+            width: 70px; 
+            height: 95px;
             object-fit: cover;
             border: 2px solid #106B6B;
             border-radius: 8px;
@@ -74,9 +82,9 @@
         }
 
         @media (max-width: 600px) {
-            .library-menu { padding: 10px 20px; gap: 15px; width: 90%; justify-content: center; }
+            .library-menu { padding: 10px 15px; top: 10px; width: 95%; border-radius: 15px; }
             .library-menu h3 { font-size: 16px; padding-left: 10px; }
-            .thumb-btn img { width: 50px; height: 70px; }
+            .thumb-btn img { width: 55px; height: 75px; }
             .thumb-btn span { font-size: 12px; }
         }
     </style>
@@ -86,18 +94,104 @@
     <div class="library-menu">
         <h3>📚 مكتبتي</h3>
         
-        <a href="?book=The-Room" class="thumb-btn">
-            <img src="./covers/The-Room.png" alt="The Room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=The+Room'"> 
-            <span>الغرفة</span>
+        <a href="?book=All-about-me" class="thumb-btn">
+            <img src="./covers/All-about-me.png" alt="All about me" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>All About Me</span>
         </a>
-
+        <a href="?book=Daily-Routine" class="thumb-btn">
+            <img src="./covers/Daily-Routine.png" alt="Daily Routine" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Daily Routine</span>
+        </a>
+        <a href="?book=Days-of-the-Week" class="thumb-btn">
+            <img src="./covers/Days-of-the-Week.png" alt="Days of the Week" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Days of the Week</span>
+        </a>
+        <a href="?book=Dining-room" class="thumb-btn">
+            <img src="./covers/Dining-room.png" alt="Dining room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Dining Room</span>
+        </a>
+        <a href="?book=Environment" class="thumb-btn">
+            <img src="./covers/Environment.png" alt="Environment" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Environment</span>
+        </a>
+        <a href="?book=Feelings" class="thumb-btn">
+            <img src="./covers/Feelings.png" alt="Feelings" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Feelings</span>
+        </a>
+        <a href="?book=Four-Seasons" class="thumb-btn">
+            <img src="./covers/Four-Seasons.png" alt="Four Seasons" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Four Seasons</span>
+        </a>
+        <a href="?book=Hobbies" class="thumb-btn">
+            <img src="./covers/Hobbies.png" alt="Hobbies" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Hobbies</span>
+        </a>
+        <a href="?book=House" class="thumb-btn">
+            <img src="./covers/House.png" alt="House" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>House</span>
+        </a>
+        <a href="?book=Lets-Play" class="thumb-btn">
+            <img src="./covers/Lets-Play.png" alt="Lets Play" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Lets Play</span>
+        </a>
+        <a href="?book=Lina-and-Ahmed-in-Class" class="thumb-btn">
+            <img src="./covers/Lina-and-Ahmed-in-Class.png" alt="Lina and Ahmed" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Lina and Ahmed</span>
+        </a>
+        <a href="?book=Living-room" class="thumb-btn">
+            <img src="./covers/Living-room.png" alt="Living room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Living Room</span>
+        </a>
+        <a href="?book=Meeting-friends" class="thumb-btn">
+            <img src="./covers/Meeting-friends.png" alt="Meeting friends" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Meeting Friends</span>
+        </a>
+        <a href="?book=My Family - Bubbles in Arabic" class="thumb-btn">
+            <img src="./covers/My Family - Bubbles in Arabic.png" alt="My Family" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>My Family</span>
+        </a>
+        <a href="?book=My-Extended-Family" class="thumb-btn">
+            <img src="./covers/My-Extended-Family.png" alt="My Extended Family" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Extended Family</span>
+        </a>
+        <a href="?book=Objects-in-a room" class="thumb-btn">
+            <img src="./covers/Objects-in-a room.png" alt="Objects in a room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Objects in a Room</span>
+        </a>
+        <a href="?book=Objects-in-living-room" class="thumb-btn">
+            <img src="./covers/Objects-in-living-room.png" alt="Objects in living room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Living Room Objects</span>
+        </a>
+        <a href="?book=Objects-in-the-Bathroom" class="thumb-btn">
+            <img src="./covers/Objects-in-the-Bathroom.png" alt="Bathroom" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Bathroom Objects</span>
+        </a>
+        <a href="?book=Objects-in-the-Kitchen" class="thumb-btn">
+            <img src="./covers/Objects-in-the-Kitchen.png" alt="Kitchen" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Kitchen Objects</span>
+        </a>
+        <a href="?book=Omar-and-Sarah-in-the-Classroom" class="thumb-btn">
+            <img src="./covers/Omar-and-Sarah-in-the-Classroom.png" alt="Omar and Sarah" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Omar and Sarah</span>
+        </a>
+        <a href="?book=On-the-Way-Home" class="thumb-btn">
+            <img src="./covers/On-the-Way-Home.png" alt="On the Way Home" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>On the Way Home</span>
+        </a>
+        <a href="?book=People-At-Work" class="thumb-btn">
+            <img src="./covers/People-At-Work.png" alt="People At Work" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>People At Work</span>
+        </a>
+        <a href="?book=Rami-Recipe" class="thumb-btn">
+            <img src="./covers/Rami-Recipe.png" alt="Rami Recipe" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Rami's Recipe</span>
+        </a>
+        <a href="?book=Ramzi-and-Lina-lunch" class="thumb-btn">
+            <img src="./covers/Ramzi-and-Lina-lunch.png" alt="Ramzi and Lina" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Ramzi & Lina</span>
+        </a>
         <a href="?book=Recess" class="thumb-btn">
-            <img src="./covers/Recess.png" alt="Recess" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Recess'">
-            <span>الفسحة</span>
+            <img src="./covers/Recess.png" alt="Recess" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>الفسحة</span>
         </a>
-         <a href="?book=All-about-me" class="thumb-btn">
-            <img src="./covers/All-about-me.png" alt="Recess" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=All-about-me'">
-            <span>كل شيئ عني</span>
+        <a href="?book=The-Human-Body" class="thumb-btn">
+            <img src="./covers/The-Human-Body.png" alt="The Human Body" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Human Body</span>
+        </a>
+        <a href="?book=The-Lost-Shoe" class="thumb-btn">
+            <img src="./covers/The-Lost-Shoe.png" alt="The Lost Shoe" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Lost Shoe</span>
+        </a>
+        <a href="?book=The-Room" class="thumb-btn">
+            <img src="./covers/The-Room.png" alt="The Room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>الغرفة</span>
+        </a>
+        <a href="?book=Transporation" class="thumb-btn">
+            <img src="./covers/Transporation.png" alt="Transportation" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Transportation</span>
+        </a>
+        <a href="?book=alsifat" class="thumb-btn">
+            <img src="./covers/alsifat.png" alt="alsifat" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Alsifat</span>
+        </a>
+        <a href="?book=in-the-Garden" class="thumb-btn">
+            <img src="./covers/in-the-Garden.png" alt="in the Garden" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>In the Garden</span>
+        </a>
+        <a href="?book=sports" class="thumb-btn">
+            <img src="./covers/sports.png" alt="sports" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Sports</span>
+        </a>
+        <a href="?book=the-neighborhood" class="thumb-btn">
+            <img src="./covers/the-neighborhood.png" alt="the neighborhood" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Neighborhood</span>
         </a>
     </div>
 
