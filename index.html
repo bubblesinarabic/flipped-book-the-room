@@ -9,12 +9,75 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/themify-icons.min.css">
     
     <style>
-        /* Uses your dark teal for the very back, hiding white flashes */
-        body, html { margin: 0; padding: 0; height: 100%; background-color: #106B6B; overflow: hidden; }
+        body, html { margin: 0; padding: 0; height: 100%; background-color: #106B6B; overflow: hidden; font-family: Arial, sans-serif; }
         #flipbookContainer { width: 100%; height: 100vh; }
+
+        /* The Floating Thumbnail Menu */
+        .library-menu {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: rgba(237, 246, 247, 0.95); /* Light Mint background */
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .library-menu h3 {
+            margin: 0;
+            color: #106B6B;
+            font-size: 16px;
+            padding-left: 15px;
+            border-left: 2px solid #106B6B;
+        }
+
+        .thumb-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #106B6B;
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .thumb-btn:hover {
+            transform: scale(1.1); /* Slight zoom when hovered */
+        }
+
+        .thumb-btn img {
+            width: 50px; /* Thumbnail width */
+            height: 70px; /* Thumbnail height */
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 5px;
+            background-color: #ccc; /* Shows gray if image is missing */
+        }
     </style>
 </head>
 <body>
+
+    <div class="library-menu">
+        <h3>📚 مكتبتي</h3>
+        
+        <a href="?book=The-Room" class="thumb-btn">
+            <img src="./covers/The-Room.jpg" alt="The Room" onerror="this.style.display='none'"> 
+            <span>الغرفة</span>
+        </a>
+
+        <a href="?book=Recess" class="thumb-btn">
+             <img src="./covers/Recess.jpg" alt="Recess" onerror="this.style.display='none'">
+            <span>الفسحة</span>
+        </a>
+    </div>
+
     <div id="flipbookContainer"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -22,26 +85,18 @@
 
     <script>
         jQuery(document).ready(function () {
-            // 1. Look for the book name in the web address
             const urlParams = new URLSearchParams(window.location.search);
-            // Default to 'The-Room' if no specific book is asked for
             const bookName = urlParams.get('book') || 'The-Room'; 
 
-            // 2. The exact path to your books folder (Added ./ for strict relative linking)
             var pdfUrl = "./books/" + bookName + ".pdf";
 
-            // Safety Check: This prints the exact link in the browser console for debugging
-            console.log("Attempting to load book from: " + pdfUrl);
-
-            // 3. Flipbook settings
             var options = {
-                direction: 2,               // 2 is RTL (Right to Left for Arabic)
+                direction: 2,               
                 height: '100%',
                 duration: 700,
-                backgroundColor: "#EDF6F7"  // Your light mint color
+                backgroundColor: "#EDF6F7" 
             };
 
-            // 4. Start the flipbook
             $("#flipbookContainer").flipBook(pdfUrl, options);
         });
     </script>
