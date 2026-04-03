@@ -28,12 +28,20 @@
             align-items: center;
         }
 
-        .library-menu h3 {
-            margin: 0;
-            color: #106B6B;
-            font-size: 16px;
-            padding-left: 15px;
-            border-left: 2px solid #106B6B;
+       /* The Floating Thumbnail Menu */
+        .library-menu {
+            position: fixed; /* Changed from absolute to fixed so it stays put */
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999999 !important; /* Added 999999 and !important to force it to the very front */
+            background: rgba(237, 246, 247, 0.95);
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
         .thumb-btn {
