@@ -5,43 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bubbles Library</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/dflip.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/themify-icons.min.css">
     
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background-color: #106B6B; overflow: hidden; font-family: Arial, sans-serif; }
+        /* Base styles with Almarai font */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; 
+            background-color: #106B6B; overflow: hidden; 
+            font-family: 'Almarai', sans-serif; 
+        }
+        
         #flipbookContainer { width: 100%; height: 100vh; }
 
-        /* The Floating Thumbnail Menu */
+        /* ENHANCED FLOATING MENU */
         .library-menu {
-            position: absolute;
-            top: 20px;
+            position: fixed; 
+            top: 25px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 9999;
-            background: rgba(237, 246, 247, 0.95); /* Light Mint background */
-            padding: 10px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999999 !important; 
+            background: rgba(237, 246, 247, 0.98); /* Light Mint Background */
+            padding: 15px 35px;
+            border-radius: 25px;
+            border: 3px solid #106B6B; /* Teal Border */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             display: flex;
-            gap: 15px;
+            gap: 25px;
             align-items: center;
         }
 
-       /* The Floating Thumbnail Menu */
-        .library-menu {
-            position: fixed; /* Changed from absolute to fixed so it stays put */
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 999999 !important; /* Added 999999 and !important to force it to the very front */
-            background: rgba(237, 246, 247, 0.95);
-            padding: 10px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            display: flex;
-            gap: 15px;
-            align-items: center;
+        .library-menu h3 {
+            margin: 0;
+            color: #106B6B; /* Teal Color */
+            font-size: 22px; /* Bigger Title */
+            padding-left: 20px;
+            border-left: 3px solid #106B6B;
+            font-weight: 700;
         }
 
         .thumb-btn {
@@ -49,24 +51,35 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #106B6B;
-            font-weight: bold;
-            font-size: 12px;
-            transition: transform 0.2s;
+            color: #106B6B; /* Teal Color */
+            font-weight: 700;
+            font-size: 16px; /* Bigger Text */
+            transition: all 0.3s ease;
         }
 
         .thumb-btn:hover {
-            transform: scale(1.1); /* Slight zoom when hovered */
+            transform: translateY(-5px) scale(1.05);
+            color: #0d5252; /* Darker teal on hover */
         }
 
+        /* BIGGER THUMBNAILS */
         .thumb-btn img {
-            width: 50px; /* Thumbnail width */
-            height: 70px; /* Thumbnail height */
+            width: 80px;  /* Increased from 50px */
+            height: 110px; /* Increased from 70px */
             object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            margin-bottom: 5px;
-            background-color: #ccc; /* Shows gray if image is missing */
+            border: 2px solid #106B6B;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 8px;
+            background-color: #ccc;
+        }
+
+        /* Responsive tweak for mobile */
+        @media (max-width: 600px) {
+            .library-menu { padding: 10px 20px; gap: 15px; width: 90%; justify-content: center; }
+            .library-menu h3 { font-size: 16px; padding-left: 10px; }
+            .thumb-btn img { width: 50px; height: 70px; }
+            .thumb-btn span { font-size: 12px; }
         }
     </style>
 </head>
@@ -76,12 +89,12 @@
         <h3>📚 مكتبتي</h3>
         
         <a href="?book=The-Room" class="thumb-btn">
-            <img src="./covers/The-Room.jpg" alt="The Room" onerror="this.style.display='none'"> 
+            <img src="./covers/The-Room.jpg" alt="The Room" onerror="this.src='https://via.placeholder.com/80x110?text=Cover'"> 
             <span>الغرفة</span>
         </a>
 
         <a href="?book=Recess" class="thumb-btn">
-             <img src="./covers/Recess.jpg" alt="Recess" onerror="this.style.display='none'">
+            <img src="./covers/Recess.jpg" alt="Recess" onerror="this.src='https://via.placeholder.com/80x110?text=Cover'">
             <span>الفسحة</span>
         </a>
     </div>
