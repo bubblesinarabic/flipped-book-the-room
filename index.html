@@ -25,12 +25,12 @@
             // Direct link to your PDF on GitHub
             var pdfUrl = "https://raw.githubusercontent.com/bubblesinarabic/flipped-book-the-room/main/The-Room.pdf";
 
-            var options = {
-                direction: 2, // 2 is the code for RTL (Right to Left) in dFlip
-                height: '100%',
-                duration: 700,
-                backgroundColor: "#222"
-            };
+           var options = {
+    direction: 2, // Change to 1 for English (LTR), keep 2 for Arabic (RTL)
+    height: '100%',
+    duration: 700,
+    backgroundColor: "#222"
+};
 
             // Initialize the flipbook
             $("#flipbookContainer").flipBook(pdfUrl, options);
