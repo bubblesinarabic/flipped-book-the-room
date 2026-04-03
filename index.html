@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Room - Bubbles in Arabic</title>
-    
+    <title>Bubbles Library</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/dflip.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/themify-icons.min.css">
     
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #106B6B; }
+        body, html { margin: 0; padding: 0; height: 100%; background-color: #106B6B; overflow: hidden; }
         #flipbookContainer { width: 100%; height: 100vh; }
     </style>
 </head>
 <body>
-
     <div id="flipbookContainer"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -22,21 +20,22 @@
 
     <script>
         jQuery(document).ready(function () {
-            // Direct link to your PDF on GitHub
-            var pdfUrl = "https://raw.githubusercontent.com/bubblesinarabic/flipped-book-the-room/main/The-Room.pdf";
+            // 1. Get the book name from the URL (e.g., ?book=The-Room)
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookName = urlParams.get('book') || 'The-Room'; // Default to The-Room if none specified
 
-          var options = {
-    direction: 2,
-    startPage: 7, 
-    height: '100%',
-    backgroundColor: "#EDF6F7"
-    
-};
+            // 2. Path to your PDF folder
+            var pdfUrl = "books/" + bookName + ".pdf";
 
-            // Initialize the flipbook
+            var options = {
+                direction: 2, 
+                height: '100%',
+                duration: 700,
+                backgroundColor: "#EDF6F7" // Using your light mint color for the inner pages
+            };
+
             $("#flipbookContainer").flipBook(pdfUrl, options);
         });
     </script>
-
 </body>
 </html>
