@@ -16,36 +16,35 @@
             font-family: 'Almarai', sans-serif; 
         }
         
-        /* The Main Book Area - Leaves room on the right for the sidebar */
+/* Moves the book area to the right */
         #flipbookContainer { 
             position: absolute;
             top: 0;
-            left: 0;
-            width: calc(100% - 240px); /* 100% width minus the 240px sidebar */
+            right: 0; /* Changed from left to right */
+            width: calc(100% - 240px); 
             height: 100vh; 
         }
 
-        /* THE RIGHT SIDEBAR */
+        /* Moves the library menu to the left */
         .library-menu {
             position: fixed; 
             top: 0;
-            right: 0;
+            left: 0; /* Changed from right to left */
             width: 240px;
             height: 100vh;
             z-index: 999999 !important; 
             background: rgba(237, 246, 247, 0.98); 
             padding: 20px 10px;
-            border-left: 3px solid #106B6B; /* Border on the left side of the menu */
-            box-shadow: -4px 0 15px rgba(0,0,0,0.3);
+            border-right: 3px solid #106B6B; /* Moved the border to the right side */
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3); /* Flipped the shadow direction */
             display: flex;
-            flex-direction: column; /* Stacks items vertically */
+            flex-direction: column; 
             gap: 20px;
             align-items: center;
-            overflow-y: auto; /* Enables vertical scrolling */
+            overflow-y: auto; 
             overflow-x: hidden;
             box-sizing: border-box;
         }
-
         /* Custom Scrollbar for the Sidebar */
         .library-menu::-webkit-scrollbar { width: 8px; }
         .library-menu::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
