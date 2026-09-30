@@ -442,6 +442,7 @@
         clearTimeout(loadingTimeout); status.hidden = false;
         status.textContent = "تعذّر تحميل القارئ. يمكنك فتح القصة باستخدام زر فتح PDF.";
       }
+      function startReader() {
       try {
         if (!window.jQuery || !jQuery.fn.flipBook) throw new Error("Reader unavailable");
         jQuery("#flipbookContainer").flipBook(pdfUrl, {
@@ -461,6 +462,9 @@
           }
         });
       } catch (error) { readerFailed(); }
+      }
+      if (window.jQuery) jQuery(startReader);
+      else readerFailed();
     </script>
 </body>
 </html>
