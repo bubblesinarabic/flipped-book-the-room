@@ -136,6 +136,7 @@
           #flipbookContainer { top:112px; height:calc(100% - 112px); }
           #readerStatus { top:114px; }
         }
+        #flipbookContainer { top:0 !important; position:relative !important; }
         @media(prefers-reduced-motion:reduce) { .thumb-btn { transition:none; } }
     </style>
 </head>
@@ -446,7 +447,7 @@
       try {
         if (!window.jQuery || !jQuery.fn.flipBook) throw new Error("Reader unavailable");
         jQuery("#flipbookContainer").flipBook(pdfUrl, {
-          direction: 2, height: "100%",
+          direction: 2, height: Math.max(320, document.querySelector(".reader-main").clientHeight - document.querySelector(".reader-header").offsetHeight),
           duration: matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 700,
           backgroundColor: "#EDF6F7",
           pageMode: matchMedia("(max-width: 800px)").matches ? 1 : 2,
