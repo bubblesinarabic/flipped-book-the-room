@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubbles Library</title>
+    <title>مكتبة القصص | Bubbles بالعربي</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dflip@1.0.0/css/dflip.min.css">
@@ -111,135 +111,357 @@
             .thumb-btn img { width: 60px; height: 80px; }
             .thumb-btn span { font-size: 12px; }
         }
+    
+        #bookList { display:flex; flex-direction:column; gap:18px; width:100%; }
+        .thumb-btn[aria-current="page"] { background:#d5f5ef; border-radius:12px; padding:8px 0; }
+        .cover-fallback { display:grid; place-items:center; width:85px; height:115px; padding:8px; margin-bottom:8px; border:2px solid #106B6B; border-radius:8px; background:linear-gradient(135deg,#e9fbf8,#fff0e2); font-size:15px; }
+        .reader-main { position:absolute; inset:0 0 0 240px; background:#EDF6F7; }
+        .reader-header { min-height:76px; padding:10px 18px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; box-sizing:border-box; }
+        .reader-header h1 { font-size:21px; margin:0; color:#106B6B; }
+        .reader-actions { display:flex; gap:8px; flex-wrap:wrap; }
+        .reader-actions a { display:inline-flex; align-items:center; min-height:44px; padding:0 12px; border-radius:16px; background:#fff; color:#106B6B; font-weight:700; text-decoration:none; }
+        a:focus-visible { outline:3px solid #FFB74D; outline-offset:3px; }
+        #flipbookContainer { top:76px; right:0; width:100%; height:calc(100% - 76px); }
+        #readerStatus { position:absolute; top:78px; right:16px; z-index:2; margin:0; padding:8px 12px; border-radius:12px; background:#fff; color:#106B6B; }
+        #readerStatus[hidden] { display:none; }
+        .embed-mode .library-menu { display:none; }
+        .embed-mode .reader-main { inset:0; }
+        @media(max-width:800px) {
+          .reader-main { inset:0 0 130px; }
+          #bookList { flex-direction:row; width:auto; gap:14px; }
+          .library-menu { border-right:0; }
+          .cover-fallback { width:60px; height:80px; font-size:12px; padding:4px; box-sizing:border-box; }
+          .reader-header { min-height:112px; padding:8px 12px; }
+          .reader-header h1 { width:100%; font-size:18px; }
+          #flipbookContainer { top:112px; height:calc(100% - 112px); }
+          #readerStatus { top:114px; }
+        }
+        @media(prefers-reduced-motion:reduce) { .thumb-btn { transition:none; } }
     </style>
 </head>
 <body>
 
-    <div class="library-menu">
-        <h3>📚 مكتبتي</h3>
-        
-        <a href="?book=All-about-me" class="thumb-btn">
-            <img src="./covers/All-about-me.png" alt="All about me" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>All About Me</span>
-        </a>
-        <a href="?book=Daily-Routine" class="thumb-btn">
-            <img src="./covers/Daily-Routine.png" alt="Daily Routine" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Daily Routine</span>
-        </a>
-        <a href="?book=Days-of-the-Week" class="thumb-btn">
-            <img src="./covers/Days-of-the-Week.png" alt="Days of the Week" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Days of the Week</span>
-        </a>
-        <a href="?book=Dining-room" class="thumb-btn">
-            <img src="./covers/Dining-room.png" alt="Dining room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Dining Room</span>
-        </a>
-        <a href="?book=Environment" class="thumb-btn">
-            <img src="./covers/Environment.png" alt="Environment" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Environment</span>
-        </a>
-        <a href="?book=Feelings" class="thumb-btn">
-            <img src="./covers/Feelings.png" alt="Feelings" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Feelings</span>
-        </a>
-        <a href="?book=Four-Seasons" class="thumb-btn">
-            <img src="./covers/Four-Seasons.png" alt="Four Seasons" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Four Seasons</span>
-        </a>
-        <a href="?book=Hobbies" class="thumb-btn">
-            <img src="./covers/Hobbies.png" alt="Hobbies" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Hobbies</span>
-        </a>
-        <a href="?book=House" class="thumb-btn">
-            <img src="./covers/House.png" alt="House" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>House</span>
-        </a>
-        <a href="?book=Lets-Play" class="thumb-btn">
-            <img src="./covers/lets-play.png" alt="Lets Play" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Lets Play</span>
-        </a>
-        <a href="?book=Lina-and-Ahmed-in-Class" class="thumb-btn">
-            <img src="./covers/Lina-and-Ahmed-in-Class.png" alt="Lina and Ahmed" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Lina and Ahmed</span>
-        </a>
-        <a href="?book=Living-room" class="thumb-btn">
-            <img src="./covers/Living-room.png" alt="Living room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Living Room</span>
-        </a>
-        <a href="?book=Meeting-friends" class="thumb-btn">
-            <img src="./covers/Meeting-friends.png" alt="Meeting friends" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Meeting Friends</span>
-        </a>
-        <a href="?book=My Family - Bubbles in Arabic" class="thumb-btn">
-            <img src="./covers/My-Family.png" alt="My Family" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>My Family</span>
-        </a>
-        <a href="?book=My-Extended-Family" class="thumb-btn">
-            <img src="./covers/My-Extended-Family.png" alt="My Extended Family" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Extended Family</span>
-        </a>
-        <a href="?book=Objects-in-a room" class="thumb-btn">
-            <img src="./covers/Objects-in-a room.png" alt="Objects in a room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Objects in a Room</span>
-        </a>
-        <a href="?book=Objects-in-living-room" class="thumb-btn">
-            <img src="./covers/Objects-in-living-room.png" alt="Objects in living room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Living Room Objects</span>
-        </a>
-        <a href="?book=Objects-in-the-Bathroom" class="thumb-btn">
-            <img src="./covers/Objects-in-the-Bathroom.png" alt="Bathroom" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Bathroom Objects</span>
-        </a>
-        <a href="?book=Objects-in-the-Kitchen" class="thumb-btn">
-            <img src="./covers/Objects-in-the-Kitchen.png" alt="Kitchen" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Kitchen Objects</span>
-        </a>
-        <a href="?book=Omar-and-Sarah-in-the-Classroom" class="thumb-btn">
-            <img src="./covers/In-the-Classroom.png" alt="Omar and Sarah" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Omar and Sarah</span>
-        </a>
-        <a href="?book=On-the-Way-Home" class="thumb-btn">
-            <img src="./covers/On-the-Way-Home.png" alt="On the Way Home" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>On the Way Home</span>
-        </a>
-        <a href="?book=People-At-Work" class="thumb-btn">
-            <img src="./covers/Professions.png" alt="People At Work" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>People At Work</span>
-        </a>
-        <a href="?book=Rami-Recipe" class="thumb-btn">
-            <img src="./covers/Rami-Recipe.png" alt="Rami Recipe" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Rami's Recipe</span>
-        </a>
-        <a href="?book=Ramzi-and-Lina-lunch" class="thumb-btn">
-            <img src="./covers/Ramzi-and-Lina-lunch.png" alt="Ramzi and Lina" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Ramzi & Lina</span>
-        </a>
-        <a href="?book=Recess" class="thumb-btn">
-            <img src="./covers/Recess.png" alt="Recess" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>الفسحة</span>
-        </a>
-        <a href="?book=The-Human-Body" class="thumb-btn">
-            <img src="./covers/Human-Body.png" alt="The Human Body" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Human Body</span>
-        </a>
-        <a href="?book=The-Lost-Shoe" class="thumb-btn">
-            <img src="./covers/The-Lost-Shoe.png" alt="The Lost Shoe" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Lost Shoe</span>
-        </a>
-        <a href="?book=The-Room" class="thumb-btn">
-            <img src="./covers/The-Room.png" alt="The Room" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>الغرفة</span>
-        </a>
-        <a href="?book=Transporation" class="thumb-btn">
-            <img src="./covers/Transportation.png" alt="Transportation" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Transportation</span>
-        </a>
-        <a href="?book=alsifat" class="thumb-btn">
-            <img src="./covers/alsifat.png" alt="alsifat" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Alsifat</span>
-        </a>
-        <a href="?book=in-the-Garden" class="thumb-btn">
-            <img src="./covers/Garden.png" alt="in the Garden" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>In the Garden</span>
-        </a>
-        <a href="?book=sports" class="thumb-btn">
-            <img src=".covers/Sports.png" alt="sports" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>Sports</span>
-        </a>
-        <a href="?book=the-neighborhood" class="thumb-btn">
-            <img src="./covers/the-neighborhood.png" alt="the neighborhood" onerror="this.src='https://via.placeholder.com/80x110/106B6B/FFFFFF?text=Book'"> <span>The Neighborhood</span>
-        </a>
-    </div>
-
-    <div id="flipbookContainer"></div>
+    <aside class="library-menu" aria-label="اختيار قصة">
+      <h3>📚 قصص Bubbles</h3><nav id="bookList" aria-label="الكتب المتاحة"></nav>
+    </aside>
+    <main class="reader-main">
+      <header class="reader-header"><h1 id="bookTitle">الغرفة</h1>
+        <div class="reader-actions">
+          <a href="https://www.bubblesinarabic.com/library" target="_top">المكتبة</a>
+          <a id="pdfLink" target="_blank" rel="noopener">فتح PDF</a>
+          <a id="fullReaderLink" target="_blank" rel="noopener">فتح القارئ</a>
+        </div>
+      </header>
+      <p id="readerStatus" role="status" aria-live="polite">جارٍ تحميل القصة…</p>
+      <div id="flipbookContainer" aria-label="قارئ القصة"></div>
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dflip@1.0.0/js/dflip.min.js"></script>
 
     <script>
-        jQuery(document).ready(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const bookName = urlParams.get('book') || 'The-Room'; 
-
-            var pdfUrl = "./books/" + bookName + ".pdf";
-
-            var options = {
-                direction: 2,               
-                height: '100%',
-                duration: 700,
-                backgroundColor: "#EDF6F7" 
-            };
-
-            $("#flipbookContainer").flipBook(pdfUrl, options);
+      // One catalog for book labels, assets, and availability.
+      const BOOKS = [
+  {
+    "id": "All-about-me",
+    "title": "كل شيء عني",
+    "pdf": "books/All-about-me.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Daily-Routine",
+    "title": "روتيني اليومي",
+    "pdf": "books/Daily-Routine.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Days-of-the-Week",
+    "title": "أيام الأسبوع",
+    "pdf": "books/Days-of-the-Week.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Dining-room",
+    "title": "غرفة الطعام",
+    "pdf": "books/Dining-room.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Environment",
+    "title": "الحفاظ على الأرض",
+    "pdf": "books/Environment.pdf",
+    "cover": "covers/Environment.png",
+    "available": true
+  },
+  {
+    "id": "Feelings",
+    "title": "مشاعري",
+    "pdf": "books/Feelings.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Four-Seasons",
+    "title": "الفصول الأربعة",
+    "pdf": "books/Four-Seasons.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Hobbies",
+    "title": "الهوايات",
+    "pdf": "books/Hobbies.pdf",
+    "cover": "covers/Hobbies.png",
+    "available": true
+  },
+  {
+    "id": "House",
+    "title": "بيتي",
+    "pdf": "books/House.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Lets-Play",
+    "title": "لنلعب",
+    "pdf": "books/Lets-Play.pdf",
+    "cover": "covers/lets-play.png",
+    "available": true
+  },
+  {
+    "id": "Lina-and-Ahmed-in-Class",
+    "title": "لينا وأحمد في الصف",
+    "pdf": "books/Lina-and-Ahmed-in-Class.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Living-room",
+    "title": "غرفة الجلوس",
+    "pdf": "books/Living-room.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Meeting-friends",
+    "title": "لقاءات بين الأصدقاء",
+    "pdf": "books/Meeting-friends.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "My Family - Bubbles in Arabic",
+    "title": "عائلتي",
+    "pdf": "books/My Family - Bubbles in Arabic.pdf",
+    "cover": "covers/My-Family.png",
+    "available": true
+  },
+  {
+    "id": "My-Extended-Family",
+    "title": "عائلتي الكبيرة",
+    "pdf": "books/My-Extended-Family.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Objects-in-a room",
+    "title": "أشياء في الغرفة",
+    "pdf": "books/Objects-in-a room.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Objects-in-living-room",
+    "title": "أشياء في غرفة الجلوس",
+    "pdf": "books/Objects-in-living-room.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Objects-in-the-Bathroom",
+    "title": "أشياء في الحمام",
+    "pdf": "books/Objects-in-the-Bathroom.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Objects-in-the-Kitchen",
+    "title": "أشياء في المطبخ",
+    "pdf": "books/Objects-in-the-Kitchen.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Omar-and-Sarah-in-the-Classroom",
+    "title": "عمر وسارة في الصف",
+    "pdf": "books/Omar-and-Sarah-in-the-Classroom.pdf",
+    "cover": "covers/In-the-Classroom.png",
+    "available": true
+  },
+  {
+    "id": "On-the-Way-Home",
+    "title": "في الطريق إلى البيت",
+    "pdf": "books/On-the-Way-Home.pdf",
+    "cover": null,
+    "available": false
+  },
+  {
+    "id": "People-At-Work",
+    "title": "المهن",
+    "pdf": "books/People-At-Work.pdf",
+    "cover": "covers/Professions.png",
+    "available": true
+  },
+  {
+    "id": "Rami-Recipe",
+    "title": "طبخة رامي",
+    "pdf": "books/Rami-Recipe.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Ramzi-and-Lina-lunch",
+    "title": "رمزي ولينا وقت الغداء",
+    "pdf": "books/Ramzi-and-Lina-lunch.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "Recess",
+    "title": "الفسحة",
+    "pdf": "books/Recess.pdf",
+    "cover": "covers/Recess.png",
+    "available": true
+  },
+  {
+    "id": "The-Human-Body",
+    "title": "أجزاء جسم الإنسان",
+    "pdf": "books/The-Human-Body.pdf",
+    "cover": "covers/Human-Body.png",
+    "available": true
+  },
+  {
+    "id": "The-Lost-Shoe",
+    "title": "الحذاء الضائع",
+    "pdf": "books/The-Lost-Shoe.pdf",
+    "cover": "covers/The-Lost-Shoe.png",
+    "available": true
+  },
+  {
+    "id": "The-Room",
+    "title": "الغرفة",
+    "pdf": "books/The-Room.pdf",
+    "cover": "covers/The-Room.png",
+    "available": true
+  },
+  {
+    "id": "Transporation",
+    "title": "وسائل النقل",
+    "pdf": "books/Transporation.pdf",
+    "cover": "covers/Transportation.png",
+    "available": true
+  },
+  {
+    "id": "alsifat",
+    "title": "الصفات",
+    "pdf": "books/alsifat.pdf",
+    "cover": null,
+    "available": true
+  },
+  {
+    "id": "in-the-Garden",
+    "title": "في الحديقة",
+    "pdf": "books/in-the-Garden.pdf",
+    "cover": "covers/Garden.png",
+    "available": true
+  },
+  {
+    "id": "sports",
+    "title": "الرياضات",
+    "pdf": "books/sports.pdf",
+    "cover": "covers/Sports.png",
+    "available": true
+  },
+  {
+    "id": "the-neighborhood",
+    "title": "جولة في الحي",
+    "pdf": "books/the-neighborhood.pdf",
+    "cover": null,
+    "available": true
+  }
+];
+      const params = new URLSearchParams(location.search);
+      const requested = params.get("book") || "The-Room";
+      const book = BOOKS.find(item => item.id === requested && item.available)
+        || BOOKS.find(item => item.id === "The-Room");
+      document.body.classList.toggle("embed-mode", params.get("embed") === "1");
+      document.title = book.title + " | Bubbles بالعربي";
+      document.getElementById("bookTitle").textContent = book.title;
+      const pdfUrl = new URL(book.pdf, location.href).href;
+      document.getElementById("pdfLink").href = pdfUrl;
+      const fullUrl = new URL(location.href);
+      fullUrl.searchParams.set("book", book.id);
+      fullUrl.searchParams.delete("embed");
+      document.getElementById("fullReaderLink").href = fullUrl.href;
+      const list = document.getElementById("bookList");
+      BOOKS.filter(item => item.available).forEach(item => {
+        const link = document.createElement("a");
+        link.className = "thumb-btn";
+        const url = new URL(location.href);
+        url.searchParams.set("book", item.id);
+        link.href = url.href;
+        if (item.id === book.id) link.setAttribute("aria-current", "page");
+        const fallback = () => {
+          const cover = document.createElement("span");
+          cover.className = "cover-fallback";
+          cover.textContent = item.title;
+          cover.setAttribute("aria-hidden", "true");
+          return cover;
+        };
+        if (item.cover) {
+          const img = document.createElement("img");
+          img.src = item.cover; img.alt = ""; img.loading = "lazy";
+          img.addEventListener("error", () => img.replaceWith(fallback()), {once:true});
+          link.append(img);
+        } else link.append(fallback());
+        const label = document.createElement("span");
+        label.textContent = item.title; link.append(label); list.append(link);
+      });
+      const status = document.getElementById("readerStatus");
+      if (requested !== book.id) status.textContent = "هذه القصة غير متاحة حاليًا. اخترنا لك قصة الغرفة.";
+      const loadingTimeout = setTimeout(() => {
+        status.hidden = false;
+        status.textContent = "إذا لم تظهر القصة، استخدم زر فتح PDF.";
+      }, 20000);
+      function readerReady() { clearTimeout(loadingTimeout); status.hidden = true; }
+      function readerFailed() {
+        clearTimeout(loadingTimeout); status.hidden = false;
+        status.textContent = "تعذّر تحميل القارئ. يمكنك فتح القصة باستخدام زر فتح PDF.";
+      }
+      try {
+        if (!window.jQuery || !jQuery.fn.flipBook) throw new Error("Reader unavailable");
+        jQuery("#flipbookContainer").flipBook(pdfUrl, {
+          direction: 2, height: "100%",
+          duration: matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 700,
+          backgroundColor: "#EDF6F7",
+          pageMode: matchMedia("(max-width: 800px)").matches ? 1 : 2,
+          singlePageMode: 2, onReady: readerReady,
+          text: {
+            previousPage:"الصفحة السابقة", nextPage:"الصفحة التالية",
+            toggleFullscreen:"ملء الشاشة", zoomIn:"تكبير", zoomOut:"تصغير",
+            toggleThumbnails:"مصغرات الصفحات", toggleOutline:"فهرس القصة",
+            singlePageMode:"صفحة واحدة", doublePageMode:"صفحتان",
+            downloadPDFFile:"تحميل PDF", gotoFirstPage:"الصفحة الأولى",
+            gotoLastPage:"الصفحة الأخيرة", toggleSound:"صوت تقليب الصفحات",
+            share:"مشاركة", more:"المزيد"
+          }
         });
+      } catch (error) { readerFailed(); }
     </script>
 </body>
 </html>
+
